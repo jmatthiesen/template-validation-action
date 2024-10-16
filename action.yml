@@ -214,7 +214,7 @@ runs:
       uses: Azure/setup-azd@v1.0.0
 
     - name: Log in with Azure (Federated Credentials)
-      if: ${{ env.AZURE_CLIENT_ID != '' && inputs.useDevContainer == 'false' }}
+      if: ${{ inputs.validateAzd == 'true' && inputs.useDevContainer == 'false' }}
       run: |
         azd auth login --client-id "${{ env.AZURE_CLIENT_ID }}" --federated-credential-provider "github" --tenant-id "${{ env.AZURE_TENANT_ID }}"
       shell: bash
