@@ -64,6 +64,7 @@ runs:
         relative_working_directory=$(realpath --relative-to="${{ github.workspace }}" "$working_directory")
         echo "relative_source_path=$relative_source_path" >> $GITHUB_ENV
         echo "relative_working_directory=$relative_working_directory" >> $GITHUB_ENV
+      shell: bash
 
     # Analyze templates for MI compliance with PSRule for Azure
     - name: Analyze templates for MI compliance
