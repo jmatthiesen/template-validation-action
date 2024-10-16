@@ -37,7 +37,7 @@ jobs:
           done
 
       - id: validation
-        uses: microsoft/template-validation-action@main
+        uses: microsoft/template-validation-action@feat/add-ps-rule-baseline
         with:
           workingDirectory: ${{ runner.temp }}/template
           validateAzd: false
