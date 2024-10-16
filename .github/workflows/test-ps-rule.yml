@@ -1,0 +1,40 @@
+name: Template Validation Sample Workflow for PSRule
+on: 
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  template_validation_job:
+    runs-on: ubuntu-latest
+    name: template validation
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Clone repo
+        working-directory: ${{ runner.temp }}
+        run: |
+          git clone https://github.com/Azure-Samples/azd-ai-starter template
+
+          candidate_hooks_paths=("./template/hooks" "./template/infra/hooks" "./template/scripts" "./template/deploy/aca/scripts" "./template/deploy/aks/scripts" "./template/deploy/app-service/scripts")
+          for hooks_path in "${candidate_hooks_paths[@]}"; do
+            if [ -d "$hooks_path" ] && [ "$(ls -A $hooks_path/*.sh 2>/dev/null)" ]; then
+              chmod +x $hooks_path/*.sh
+              echo "Executable permissions set for .sh files in $hooks_path"
+            else
+              echo "No hooks directory or no .sh files found in $hooks_path"
+            fi
+          done
+
+      - id: validation
+        uses: microsoft/template-validation-action@main
+        with:
+          workingDirectory: ${{ runner.temp }}/template
+          validateAzd: false
+          useDevContainer: false
+          securityAction: 'PSRule'
+          topics: ''
+
+      - name: print result
+        run: cat ${{ steps.validation.outputs.resultFile }}

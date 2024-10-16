@@ -54,16 +54,29 @@ runs:
       shell: bash
       env:
         GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
-    
+
+    - name: Calculate relative paths for PSRule
+      id: calculate_relative_paths
+      run: |
+        source_path="${{ github.action_path }}/.ps-rule/"
+        working_directory="${{ inputs.workingDirectory }}"
+        relative_source_path=$(realpath --relative-to="${{ github.workspace }}" "$source_path")
+        relative_working_directory=$(realpath --relative-to="${{ github.workspace }}" "$working_directory")
+        echo "relative_source_path=$relative_source_path" >> $GITHUB_ENV
+        echo "relative_working_directory=$relative_working_directory" >> $GITHUB_ENV
+
     # Analyze templates for MI compliance with PSRule for Azure
     - name: Analyze templates for MI compliance
       uses: microsoft/ps-rule@v2.9.0
+      if: ${{ inputs.securityAction == 'PSRule' }}
       id: run_psrule
       with:
-        source: '${{ ABSOLUTE_PATH_ACTION }}/.ps-rule/'
-        path: ${{ inputs.workingDirectory }}
+        source: ${{ env.relative_source_path }}
+        path: ${{ env.relative_working_directory }}
         modules: 'PSRule.Rules.Azure'
         baseline: 'TemplateValidation.MI_2024_10'
+        outputFormat": "json"
+        output: 'ps-rule-output.json'
 
     - name: Set environment name with timestamp
       id: set_env_name
