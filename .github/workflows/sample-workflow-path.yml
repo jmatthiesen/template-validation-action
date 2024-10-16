@@ -24,7 +24,7 @@ jobs:
       - name: Clone repo
         working-directory: ${{ runner.temp }}
         run: |
-          git clone https://github.com/Azure-Samples/azd-ai-starter template
+          git clone https://github.com/Azure-Samples/azure-search-openai-demo-java template
 
           candidate_hooks_paths=("./template/hooks" "./template/infra/hooks" "./template/scripts" "./template/deploy/aca/scripts" "./template/deploy/aks/scripts" "./template/deploy/app-service/scripts")
           for hooks_path in "${candidate_hooks_paths[@]}"; do

@@ -76,8 +76,8 @@ runs:
         path: ${{ env.relative_working_directory }}
         modules: 'PSRule.Rules.Azure'
         baseline: 'TemplateValidation.MI_2024_10'
-        outputFormat": "json"
-        output: 'ps-rule-output.json'
+        outputFormat: "json"
+        outputPath: 'ps-rule-output.json'
 
     - name: Set environment name with timestamp
       id: set_env_name
