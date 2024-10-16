@@ -76,6 +76,7 @@ runs:
         path: ${{ env.relative_working_directory }}
         modules: 'PSRule.Rules.Azure'
         baseline: 'TemplateValidation.MI_2024_10'
+        inputPath: ${{ env.relative_working_directory }}/**/*.test.bicep'
         outputFormat: "json"
         outputPath: 'ps-rule-output.json'
 
