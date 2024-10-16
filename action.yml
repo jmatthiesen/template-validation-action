@@ -58,10 +58,10 @@ runs:
     - name: Calculate relative paths for PSRule
       id: calculate_relative_paths
       run: |
-        source_path="${{ github.action_path }}/.ps-rule/"
         working_directory="${{ inputs.workingDirectory }}"
-        relative_source_path=$(realpath --relative-to="${{ github.workspace }}" "$source_path")
         relative_working_directory=$(realpath --relative-to="${{ github.workspace }}" "$working_directory")
+        source_path="${{ github.action_path }}/.ps-rule/"
+        relative_source_path=$(realpath --relative-to="$relative_working_directory" "$source_path")
         echo "relative_source_path=$relative_source_path" >> $GITHUB_ENV
         echo "relative_working_directory=$relative_working_directory" >> $GITHUB_ENV
       shell: bash
