@@ -22,9 +22,8 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Clone repo
-        working-directory: ${{ runner.temp }}
         run: |
-          git clone https://github.com/Azure-Samples/azure-search-openai-demo template
+          git clone https://github.com/Azure-Samples/azure-search-openai-demo
 
           candidate_hooks_paths=("./template/hooks" "./template/infra/hooks" "./template/scripts" "./template/deploy/aca/scripts" "./template/deploy/aks/scripts" "./template/deploy/app-service/scripts")
           for hooks_path in "${candidate_hooks_paths[@]}"; do
@@ -39,7 +38,7 @@ jobs:
       - id: validation
         uses: microsoft/template-validation-action@feat/add-ps-rule-baseline
         with:
-          workingDirectory: ${{ runner.temp }}/template
+          workingDirectory: ./azure-search-openai-demo
           validateAzd: false
           useDevContainer: false
           securityAction: 'PSRule'

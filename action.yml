@@ -79,6 +79,7 @@ runs:
       if: ${{ inputs.securityAction == 'PSRule' }}
       id: run_psrule
       with:
+        inputType: inputPath
         path: ${{ env.relative_working_directory }}
         modules: 'PSRule.Rules.Azure'
         baseline: 'TemplateValidation.MI_2024_10'
