@@ -65,12 +65,11 @@ runs:
 
     - name: Prepare PSRule for Azure
       id: prepare_psrule
-      working-directory: ${{ github.action_path }}
       run: |
-        cp -r .ps-rule "${{ inputs.workingDirectory }}/.ps-rule"
-        cp ps-rule.yaml "${{ inputs.workingDirectory }}/ps-rule.yaml"
-        cp scripts/generate-bicep-test.py ${{ inputs.workingDirectory }}/generate-bicep-test.py
-        python3 ${{ inputs.workingDirectory }}/generate-bicep-test.py 
+        cp -r ${{ github.action_path }}/.ps-rule "${{ inputs.workingDirectory }}/.ps-rule"
+        cp ${{ github.action_path}}/ps-rule.yaml "${{ inputs.workingDirectory }}/ps-rule.yaml"
+        cd ${{ inputs.workingDirectory }}
+        python3 ${{ github.action_path }}/scripts/generate-bicep-test.py 
       shell: bash
 
     # Analyze templates for MI compliance with PSRule for Azure
