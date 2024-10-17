@@ -37,7 +37,7 @@ module test 'main.bicep' = {{
         allowed_value = None
         for allowed_values, allowed_param_name, allowed_param_type in allowed_params:
             if param_name == allowed_param_name:
-                allowed_value = allowed_values.split(',')[0].strip(" ").strip("'")
+                allowed_value = allowed_values.split()[0].split(',')[0].strip(" ").strip("'")
                 break
 
         if allowed_value:
