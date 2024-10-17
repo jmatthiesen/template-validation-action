@@ -87,6 +87,10 @@ runs:
         outputFormat: "json"
         outputPath: 'ps-rule-output.json'
 
+    - name: output result
+      run: |
+        cat ${{ inputs.workingDirectory }}/ps-rule-output.json)
+
     - name: Set environment name with timestamp
       id: set_env_name
       if: ${{ inputs.validateAzd == 'true' }}
