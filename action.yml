@@ -69,9 +69,8 @@ runs:
       run: |
         cp -r .ps-rule "${{ inputs.workingDirectory }}/.ps-rule"
         cp ps-rule.yaml "${{ inputs.workingDirectory }}/ps-rule.yaml"
-        unique_name="generate_bicep_test_$(date +%s).py"
-        cp scripts/generate-bicep-test.py "${{ inputs.workingDirectory }}/$unique_name"
-        python3 "${{ inputs.workingDirectory }}/$unique_name"
+        cp scripts/generate-bicep-test.py ${{ inputs.workingDirectory }}/generate-bicep-test.py
+        python3 ${{ inputs.workingDirectory }}/generate-bicep-test.py 
       shell: bash
 
     # Analyze templates for MI compliance with PSRule for Azure
