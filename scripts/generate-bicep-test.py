@@ -69,4 +69,5 @@ def main():
         generate_test_bicep(main_bicep_path)
 
 if __name__ == "__main__":
+    print("Generating test files...")
     main()
