@@ -86,6 +86,7 @@ runs:
         baseline: 'TemplateValidation.MI_2024_10'
         outputFormat: "json"
         outputPath: 'ps-rule-output.json'
+      continue-on-error: true
 
     - name: output result
       run: |
