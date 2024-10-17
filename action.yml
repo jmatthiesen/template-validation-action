@@ -90,7 +90,8 @@ runs:
 
     - name: output result
       run: |
-        cat ${{ inputs.workingDirectory }}/ps-rule-output.json)
+        cat ${{ inputs.workingDirectory }}/ps-rule-output.json
+      shell: bash
 
     - name: Set environment name with timestamp
       id: set_env_name
